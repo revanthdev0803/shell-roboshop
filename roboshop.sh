@@ -8,7 +8,7 @@ DOMAIN_NAME="chinni.fun"
 
 for instance in ${INSTANCES[@]}
 do
-    INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t2.micro --security-group-ids sg-04ccc30b04ef49701 --tag-specifications "ResourceType=instance,Tags=[{Key=name,value=$instance}]" --query "Instances[0].InstanceId" --output text)
+    INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t2.micro --security-group-ids sg-04ccc30b04ef49701 --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     if [ $instance != "frontend" ]
     then
         IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
