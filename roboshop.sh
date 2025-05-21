@@ -18,20 +18,24 @@ do
     echo "$instance IP address: $IP"
 
     aws route53 change-resource-record-sets \
-    --hosted-zone-id $ZONE_ID\
-    --change-batch '
-    {
-        "Comment": "Updating A record set for cognito endpoint",
-        "Changes": [
+  --hosted-zone-id "$ZONE_ID" \
+  --change-batch '{
+    "Comment": "Updating A record set for cognito endpoint",
+    "Changes": [
+      {
+        "Action": "UPSERT",
+        "ResourceRecordSet": {
+          "Name": "'"$instance"'.'"$DOMAIN_NAME"'",
+          "Type": "A",
+          "TTL": 1,
+          "ResourceRecords": [
             {
-            "Action": "UPSERT",
-            "ResourceRecordSet": {
-                "Name": "'$instance'.'$DOMAIN_NAME'",
-                "Type": "A",
-                "TTL": 1,
-                "ResourceRecords": [{
-                    "Value": "'$IP'"
+              "Value": "'"$IP"'"
             }
-            }]
-    }'  
+          ]
+        }
+      }
+    ]
+  }'
+
 done
