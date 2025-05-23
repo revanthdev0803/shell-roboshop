@@ -92,7 +92,7 @@ VALIDATE $? "installing mongodb client"
 
 STATUS=$(mongosh --host mongodb.chinni.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")') | tee -a $LOG_FILE 
 
-if [ $STATUS -lt 0 ]
+if [ $STATUS -ne 0 ]
 then
     mongosh --host mongodb.chinni.fun </app/db/master-data.js | tee -a $LOG_FILE 
     VALIDATE $? "Loading data into MongoDB"
