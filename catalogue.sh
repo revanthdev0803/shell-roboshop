@@ -78,7 +78,7 @@ VALIDATE $? "unzip the file"
 npm install
 VALIDATE $? "npm is installing"
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>LOG_FILE
 VALIDATE $? "copying catalogue service"
 
 systemctl daemon-reload &>>LOG_FILE
@@ -86,15 +86,15 @@ systemctl enable catalogue &>>LOG_FILE
 systemctl start catalogue
 VALIDATE $? "starting catalogue"
 
-cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
-dnf install mongodb-mongosh -y &>>LOG_FILE
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo | tee -a $LOG_FILE 
+dnf install mongodb-mongosh -y | tee -a $LOG_FILE 
 VALIDATE $? "installing mongodb client"
 
-STATUS=$(mongosh --host mongodb.chinni.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+STATUS=$(mongosh --host mongodb.chinni.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")') | tee -a $LOG_FILE 
 
 if [ $STATUS -lt 0 ]
 then
-    mongosh --host mongodb.chinni.fun </app/db/master-data.js &>>LOG_FILE
+    mongosh --host mongodb.chinni.fun </app/db/master-data.js | tee -a $LOG_FILE 
     VALIDATE $? "Loading data into MongoDB"
 else
     echo -e "Data is already loaded...$Y SKIPPING $N"
