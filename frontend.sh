@@ -65,6 +65,7 @@ VALIDATE $? "unzipping front end"
 
 rm -rf /etc/nginx/nginx.conf
 VALIDATE $? "remove default inginx"
+
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 VALIDATE $? "copying nginx.conf"
 
