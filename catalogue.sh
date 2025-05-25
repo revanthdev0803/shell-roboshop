@@ -78,7 +78,7 @@ dnf install mongodb-mongosh -y
 
 STATUS=$(mongosh --host mongodb.chinni.fun --quiet --eval 'db.getSiblingDB("catalogue").getCollectionNames().length')
 
-if [ "$STATUS" -eq 0 ]
+if [ "$STATUS" -lt 0 ]
 then
     mongosh --host mongodb.chinni.fun </app/db/master-data.js
     VALIDATE $? "importing MongoDB schema"
