@@ -82,5 +82,3 @@ then
     mongosh --host mongodb.chinni.fun </app/db/master-data.js
 else
     echo -e "data is alreay loaded"
-
-echo "hi"
