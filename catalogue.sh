@@ -76,9 +76,12 @@ systemctl start catalogue
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y
 
-STATUS=$(mongosh --host mongodb.chinni.fun --eval 'db.getMongo().getDBNames().indexof("catalogue")')
-if [ $STATUS -lt 0]
+STATUS=$(mongosh --host mongodb.chinni.fun --quiet --eval 'db.getSiblingDB("catalogue").getCollectionNames().length')
+
+if [ "$STATUS" -eq 0 ]
 then
     mongosh --host mongodb.chinni.fun </app/db/master-data.js
+    VALIDATE $? "importing MongoDB schema"
 else
-    echo -e "data is alreay loaded"
+    echo -e "${Y}Data is already loaded, skipping import.${N}" | tee -a $LOG_FILE
+fi
