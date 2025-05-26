@@ -53,7 +53,7 @@ VALIDATE $? "enabiling mongo"
 systemctl start mongod &>>$LOG_FILE
 VALIDATE $? "starting mongodb"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+sed -i 's/127.0.0.1/0.0.0.0./g' /etc/mongod.conf
 VALIDATE $? "EDITING MONGODB CONF FILE FOR REMOTE CONNECTIONS"
 
 systemctl restart mongod &>>$LOG_FILE
