@@ -7,7 +7,7 @@ ZONE_ID="Z022707230EX5QM3U8XUK"
 DOMAIN_NAME="chinni.fun"
  
 
-for instance in ${(INSTANCES[@])}
+for instance in ${INSTANCES[@]}
 do
 INSTANCE_ID=$(aws ec2 run-instances \
     --image-id ami-0d70546e43a941d70 \
