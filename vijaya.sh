@@ -10,9 +10,9 @@ DOMAIN_NAME="chinni.fun"
 for instance in ${INSTANCES[@]}
 do
 INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id ami-0d70546e43a941d70 \
+    --image-id $AMI_ID \
     --instance-type t2.micro \
-    --security-group-ids sg-063c02687e1103c7b \
+    --security-group-ids $SG_ID \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
    
     if [ $instance != "frontend" ]
