@@ -51,6 +51,6 @@ INSTANCE_ID=$(aws ec2 run-instances \
             ]
         }
         }
-    ]
+        ]
     }
 done 
