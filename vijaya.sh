@@ -28,5 +28,5 @@ INSTANCE_ID=$(aws ec2 run-instances \
         --output text)
     fi
 
-    echo "$instace IP adress $IP"
+    echo "$instance IP adress $IP"
 done 
