@@ -26,6 +26,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
         --instance-ids $instance \
         --query "Reservations[0].Instances[0].PrivateIpAddress" \
         --output text)
-fi
+    fi
 
-echo "$instace IP adress $IP" 
+    echo "$instace IP adress $IP"
+done 
