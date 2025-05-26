@@ -13,7 +13,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --image-id ami-0d70546e43a941d70 \
     --instance-type t2.micro \
     --security-group-ids sg-063c02687e1103c7b \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]"--query "Instances[0].InstanceId" --output text)
+    --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
    
     if [ $instance != "frontend" ]
     then
