@@ -1,5 +1,5 @@
-developing code for ec2 in stance
-
+#developing code for ec2 in stance
+#!/bin/bash
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID:="sg-04ccc30b04ef49701"
 INSTANCES=("mongodb" "frontend" "catalouge")
