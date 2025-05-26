@@ -31,26 +31,24 @@ INSTANCE_ID=$(aws ec2 run-instances \
     echo "$instance IP adress $IP"
 
 
-     {
-
-        aws route53 change-resource-record-sets \
-         --hosted-zone-id $ZONE_ID \
-        --change-batch file:///path/to/your/file.json
-     "Comment": "Update A record for example.com",
+    aws route53 change-resource-record-sets \
+  --hosted-zone-id "$ZONE_ID" \
+  --change-batch '{
+    "Comment": "Updating A record set for cognito endpoint",
     "Changes": [
-        {
+      {
         "Action": "UPSERT",
         "ResourceRecordSet": {
-        "Name": "$instance.$DOMAIN_NAME",
-        "Type": "A",
-        "TTL": 300,
-        "ResourceRecords": [
+          "Name": "'$instance'.'$DOMAIN_NAME'",
+          "Type": "A",
+          "TTL": 1,
+          "ResourceRecords": [
             {
-                "Value": "1.2.3.4"
-             }
-            ]
+              "Value": "'$IP'"
+            }
+          ]
         }
-        }
-        ]
-    }
+      }
+    ]
+  }'
 done 
