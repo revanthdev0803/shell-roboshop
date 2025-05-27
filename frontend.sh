@@ -64,7 +64,7 @@ unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "unzipping front end"
 
 rm -rf /etc/nginx/nginx.conf
-VALIDATE $? "remove default inginx"
+VALIDATE $? "remove default nginx"
 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 VALIDATE $? "copying nginx.conf"
