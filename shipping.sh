@@ -73,7 +73,7 @@ VALIDATE $? "moving and renaming jar file"
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 
 systemctl daemon-reload 
-VALIDATE$? "dameon reloaded"
+VALIDATE $? "dameon reloaded"
 systemctl enable shipping 
 VALIDATE $? "enable shipping"
 systemctl start shipping 
@@ -92,4 +92,4 @@ else
     echo -e "data is already loaded into mysql...$Y skipping $N"
 fi
 
-systemctl restart shipping &<<$LOG_FILE
+systemctl restart shipping 
