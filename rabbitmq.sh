@@ -41,7 +41,7 @@ VALIDATE(){
 
 
 
-cp rabbitmq.service /etc/yum.repos.d/rabbitmq.repo
+cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 VALIDATE $? "copying"
 
 dnf install rabbitmq-server -y
