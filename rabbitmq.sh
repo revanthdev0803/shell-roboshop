@@ -45,8 +45,11 @@ cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
 VALIDATE $? "copying"
 
 dnf install rabbitmq-server -y &>>$LOG_FILE
+VALIDATE $? "installing rabbtmq server"
 systemctl enable rabbitmq-server &>>$LOG_FILE
+VALIDATE $? "enabling"
 systemctl start rabbitmq-server &>>$LOG_FILE
+VALIDATE $? "starting"
 
 rabbitmqctl add_user roboshop $RABBITMQ_PASSWD
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
