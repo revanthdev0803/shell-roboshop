@@ -86,13 +86,10 @@ mysql -h mysql.chinni.fun -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities'
 if [ $? -ne 0 ]
 then
     mysql -h mysql.chinni.fun -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql
-
     mysql -h mysql.chinni.fun -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql  
-
     mysql -h mysql.chinni.fun -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql
-    VALIDATE $? "loading data into my sql"
 else 
     echo -e "data is already loaded into mysql...$Y skipping $N"
 fi
 
-systemctl restart shipping
+systemctl restart shipping &<<$LOG_FILE
