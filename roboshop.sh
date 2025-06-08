@@ -3,7 +3,7 @@
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-04ccc30b04ef49701" 
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
-ZONE_ID="Z022707230EX5QM3U8XUK"
+ZONE_ID="Z01675523V0BXK5MIKKGB"
 DOMAIN_NAME="chinni.fun"
 
 for instance in ${INSTANCES[@]}
