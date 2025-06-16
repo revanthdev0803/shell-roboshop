@@ -6,7 +6,7 @@ SG_ID="sg-04ccc30b04ef49701"
 ZONE_ID="Z01675523V0BXK5MIKKGB"
 DOMAIN_NAME="chinni.fun"
 
-for instance in {[$@]}
+for instance in {[$1,$2]}
 do
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t2.micro --security-group-ids sg-04ccc30b04ef49701 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     if [ $instance != "frontend" ]
