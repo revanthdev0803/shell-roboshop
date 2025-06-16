@@ -2,11 +2,11 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-04ccc30b04ef49701" 
-#INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 ZONE_ID="Z01675523V0BXK5MIKKGB"
 DOMAIN_NAME="chinni.fun"
 
-for instance in {[$@]}
+for instance in ${INSTANCES[@]}
 do
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t2.micro --security-group-ids sg-04ccc30b04ef49701 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     if [ $instance != "frontend" ]
